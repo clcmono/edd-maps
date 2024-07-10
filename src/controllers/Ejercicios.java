@@ -3,6 +3,7 @@ package controllers;
 import java.util.HashMap;
 
 public class Ejercicios {
+
     /**
      * Determina si dos cadenas de caracteres son anagramas.
      * Dos cadenas son anagramas si tienen los mismos caracteres en la misma
@@ -27,27 +28,21 @@ public class Ejercicios {
      * frecuencia.
      */
     public static boolean areAnagrams(String str1, String str2) {
+        if(str1.length() != str2.length()) return false;
+        HashMap<Character,Integer> anagramas = new HashMap<>();
+        HashMap<Character,Integer> anagramas2 = new HashMap<>();
         
-       if (str1.length() != str2.length()) return false;
-       HashMap<Character,Integer> Map1 = new HashMap<>();
-       HashMap<Character,Integer> Map2 = new HashMap<>();
-       //Barridos de strings y guardar la cantidad de cada caracter
-       for (int i = 0; i< (Map1.keySet()).size(); i++){
-
-       }
-       //for str1
-       //for str2
-       for(Character character: Map1.keySet()){
-        for (Character value: Map2.keySet()){
-
+        //Barridos de strings y guardar la cantidad de cada caracter
+        //for al str1
+        for(Character stringchar: str1.toCharArray()){
+            anagramas.put(stringchar, anagramas.getOrDefault(anagramas2, 0)+1);
         }
-        
-       }
-       return false;
-       
-          
+        //for al str2
+        for(Character string2char: str1.toCharArray()){
+            anagramas2.put(string2char, anagramas2.getOrDefault(anagramas, 0)+1);
+        }
 
-    
+        return anagramas.equals(anagramas2);
 
     }
 
@@ -67,6 +62,20 @@ public class Ejercicios {
      * Output: null
      */
     public int[] sumatoriaDeDos(int[] nums, int objetivo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        HashMap<Integer,Integer> sum = new HashMap<>();
+
+        int index = 0;
+        for(int num : nums){
+            int aux = objetivo - num;
+
+            if (sum.containsKey(aux)) {
+                return new int[] { sum.get(aux), index };
+            }
+            
+            sum.put(num, index++);
+        }
+
+        return null;
+        
     }
 }
